@@ -27,9 +27,11 @@ services:
 
   # 3. FRONTEND (REACT)
   frontend:
-    build: ./react-frontend  # Docker gleda u ovaj folder
+    build: ./frontend  # Docker gleda u ovaj folder
     container_name: react_app
     ports:
-      - "80:80"              # Frontend će biti dostupan na localhost:80
+      - "8080:80"              # Frontend će biti dostupan na localhost:80
+    depends_on:
+      - api
 volumes:
   db_data:
