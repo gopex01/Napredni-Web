@@ -1,0 +1,2 @@
+docker-compose up --Docker pali bazu i tvoj Rust API. Sve je odmah povezano.
+Pritisneš Ctrl + C u tom terminalu ili kucaš docker-compose stop u drugom.

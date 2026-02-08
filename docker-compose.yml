@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=predrag123
       - POSTGRES_DB=projekat_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 
@@ -21,7 +21,7 @@ services:
     depends_on:
       - db                   # Sačekaj da se baza digne pre nego što kreneš
     environment:
-      - DATABASE_URL=postgres://admin:mojalozinka@db:5432/projekat_db
+      - DATABASE_URL=postgres://admin:predrag123@db:5432/projekat_db
     ports:
       - "3000:3000"
 
