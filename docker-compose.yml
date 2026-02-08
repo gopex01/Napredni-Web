@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # 1. BAZA
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_baza
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=predrag123
+      - POSTGRES_DB=projekat_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  # 2. BACKEND (RUST)
+  api:
+    build: ./rust-backend    # Docker gleda u ovaj folder i traži Dockerfile
+    container_name: rust_api
+    depends_on:
+      - db                   # Sačekaj da se baza digne pre nego što kreneš
+    environment:
+      - DATABASE_URL=postgres://admin:mojalozinka@db:5432/projekat_db
+    ports:
+      - "3000:3000"
+
+  # 3. FRONTEND (REACT)
+  frontend:
+    build: ./react-frontend  # Docker gleda u ovaj folder
+    container_name: react_app
+    ports:
+      - "80:80"              # Frontend će biti dostupan na localhost:80
+volumes:
+  db_data:
